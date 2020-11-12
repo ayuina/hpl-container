@@ -19,7 +19,7 @@ docker build -t hpl .
 ## How to run
 
 ```bash
-docker run -it --rm hpl /bin/bash -c 'mpirun -np 4 /src/hpl-2.3/bin/linux64/xhpl'
+docker run -it --rm hpl /bin/bash -c 'mpirun -np 4 xhpl'
 ```
 
 `mpirun` 実行時に `root` だと権限が強すぎるといって怒られるので、実行ユーザーを変更するか `--allow-run-as-root` オプション付きで実行してみてください。
@@ -53,5 +53,5 @@ End of Tests.
 ## How to tuning
 
 現状の Dockerfile ではベンチマークの実行条件である `HPL.dat` はコンテナイメージのビルド時にコピーする作りになっていますので、このままだと毎回同じ条件でしか実行できません。
-条件を変えて実行されたい場合には、先ほどビルドしたイメージをベースにして HPL.data を `/src/hpl-2.3/bin/linux64` にコピーする Dockerfile を用意すると良いかと思います。
+条件を変えて実行されたい場合には、先ほどビルドしたイメージをベースにして HPL.data を `WORKDIR` にコピーする Dockerfile を用意してイメージをビルドすると手っ取り早いかと思います。
 
