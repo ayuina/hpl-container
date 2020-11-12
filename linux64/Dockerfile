@@ -27,6 +27,9 @@ RUN wget http://www.netlib.org/benchmark/hpl/hpl-2.3.tar.gz \
     && tar zxvf hpl-2.3.tar.gz \
     && cd ./hpl-2.3 \
     && cp ../Make.linux64 ./ \
-    && make arch=linux64 \
-    && cp ../HPL.dat ./bin/linux64/
+    && make arch=linux64 
+
+WORKDIR /app
+RUN cp /src/hpl-2.3/bin/linux64/xhpl . \
+    && cp /src/HPL.dat .
 
